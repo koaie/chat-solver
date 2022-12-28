@@ -1,21 +1,39 @@
 package net.chat;
 
-import net.fabricmc.api.ModInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.regex.*;
 
-public class solver implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+public class Solver {
+    String input;
+    public Solver(String input)
+    {
+        this.input = input;
+    }
 
-	@Override
-	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+    public String testAll(){
+        int maths = this.arithmetic();
+        if(maths != 0) {
+            return Integer.toString(maths);
+        }
+        return null;
+    }
 
-		LOGGER.info("Hello Fabric world!");
-	}
+    
+    public int arithmetic() {
+        Pattern p = Pattern.compile("The first to solve '(\\d{1,4})\\s([-+])\\s(\\d{1,4})' wins!");
+		Matcher m = p.matcher(this.input);
+        if(!m.find())
+        {
+            return 0;
+        }
+
+        int x = Integer.parseInt(m.group(1));
+        int y = Integer.parseInt(m.group(3));
+        String op = m.group(2);
+
+        Logger.LOGGER.info("{} {} {}",x,op,y);
+        if(op.equals("+")) {
+            return x + y;
+        }
+        return x - y;
+    }
 }
