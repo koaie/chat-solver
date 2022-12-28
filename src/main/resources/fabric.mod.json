@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "chat.mixins.json"
   ],
 
   "depends": {

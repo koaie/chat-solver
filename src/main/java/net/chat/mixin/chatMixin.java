@@ -1,16 +1,19 @@
 package net.chat.mixin;
 
 import net.chat.solver;
-import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.text.Text;
+import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.gui.hud.MessageIndicator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.jetbrains.annotations.Nullable;
 
-@Mixin(TitleScreen.class)
+@Mixin(ChatHud.class)
 public class chatMixin {
-	@Inject(at = @At("HEAD"), method = "init()V")
-	private void init(CallbackInfo info) {
-		solver.LOGGER.info("This line is printed by an example mod mixin!");
+	@Inject(method = "logChatMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;)V", at = @At("TAIL"))
+	private void onMessageAdd(Text message,@Nullable MessageIndicator indicator, CallbackInfo ci) {
+		solver.LOGGER.info("msg:{}",message.getString());
 	}
 }
