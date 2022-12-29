@@ -28,6 +28,8 @@ public class chatMixin {
 			return;
 		}
 
+		// Random delay to avoid bot detection
+		/*  */
 		long curTime = System.currentTimeMillis();
 		long delay = (int) (Math.random() * (1500 + 1 - 700) + 700);
 		Logger.LOGGER.info("Delay:{} Current time:{}", delay, curTime);
@@ -36,8 +38,10 @@ public class chatMixin {
 			;
 		}
 		Logger.LOGGER.info("Executed at {}", System.currentTimeMillis());
+		/* */
 
-		client.setScreen(cs);
-		cs.sendMessage(solved, true);
+		client.setScreen(cs); // set and open chat box
+		cs.sendMessage(solved, true); // Send message
+		client.setScreen(null); // Close screen
 	}
 }
