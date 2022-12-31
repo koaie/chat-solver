@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.chat.Logger"
+      "net.chat.Chat"
     ]
   },
   "mixins": [
