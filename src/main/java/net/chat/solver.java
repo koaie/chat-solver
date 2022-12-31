@@ -33,17 +33,6 @@ public class Solver {
 		Logger.LOGGER.info("Executed at {}", System.currentTimeMillis());
     }
 
-    public void delay(int min, int max) {
-		long curTime = System.currentTimeMillis();
-		long delay = (int) (Math.random() * (max + 1 - min) + min);
-		Logger.LOGGER.info("Delay:{} Current time:{}", delay, curTime);
-
-		while (System.currentTimeMillis() < curTime + delay) {
-			;
-		}
-		Logger.LOGGER.info("Executed at {}", System.currentTimeMillis());
-    }
-
     
     public int arithmetic(int min, int max) {
         Pattern p = Pattern.compile("The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!");
@@ -53,7 +42,7 @@ public class Solver {
             return 65535;
         }
 
-        this.delay(min, max);
+        this.delay(min, max,0);
         int x = Integer.parseInt(m.group(1));
         int y = Integer.parseInt(m.group(3));
         String op = m.group(2);
@@ -79,7 +68,7 @@ public class Solver {
         {
             return null;
         }
-        this.delay(min, max);
+        this.delay(min, max,0);
         return m.group(1);
     }
 }
