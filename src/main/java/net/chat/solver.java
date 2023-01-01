@@ -27,7 +27,7 @@ public class Solver {
         long delay = (int) (Math.random() * (max + 1 - min) + min);
         Chat.log.info("Delay:{} Lag:{} Current time:{}", delay, lag, curTime);
 
-        while (System.currentTimeMillis() < curTime + delay + lag) {
+        while (System.currentTimeMillis() < curTime + delay - lag) {
             ;
         }
         Chat.log.info("Executed at {}", System.currentTimeMillis());
