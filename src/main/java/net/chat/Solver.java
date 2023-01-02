@@ -13,6 +13,10 @@ public class Solver {
         if (quick != null) {
             return new Answer(quick, this.delay(2200, 3000, lag));
         }
+        String reversed = this.unreverse(input);
+        if (reversed != null) {
+            return new Answer(reversed, this.delay(2500, 3300, lag));
+        }
         return null;
     }
 
@@ -29,7 +33,7 @@ public class Solver {
     }
 
     public int arithmetic(String input) {
-        Pattern p = Pattern.compile("^The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!$");
+        Pattern p = Pattern.compile("^The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!");
         Matcher m = p.matcher(input);
         if (!m.find()) {
             return 65535;
@@ -50,11 +54,23 @@ public class Solver {
     }
 
     public String quick(String input) {
-        Pattern p = Pattern.compile("^The first to type '([\\d\\w]+)' wins!$");
+        Pattern p = Pattern.compile("^The first to type '([\\d\\w]+)' wins!");
         Matcher m = p.matcher(input);
         if (!m.find()) {
             return null;
         }
         return m.group(1);
+    }
+
+    public String unreverse(String input) {
+        Pattern p = Pattern.compile("^The first to unreverse '([\\d\\w\\s]+)' back to the right order wins!");
+        Matcher m = p.matcher(input);
+        if (!m.find()) {
+            return null;
+        }
+        StringBuilder text = new StringBuilder();
+        text.append(m.group(1));
+        text.reverse();
+        return text.toString();
     }
 }
