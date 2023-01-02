@@ -1,6 +1,6 @@
 package net.chat.mixin;
 
-import net.chat.TimerAccess;
+import net.chat.MsgTimerAccess;
 import net.chat.Chat;
 import net.minecraft.client.MinecraftClient;
 
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public class msgTimer implements TimerAccess {
+public class msgTimer implements MsgTimerAccess {
 
     @Unique
     private long ticksUntilMsg;
@@ -24,7 +24,7 @@ public class msgTimer implements TimerAccess {
     }
 
     @Override
-    public void setTimer(long ticksUntilEvent) {
-        this.ticksUntilMsg = ticksUntilEvent;
+    public void setMsgTimer(long ticksUntilMsg) {
+        this.ticksUntilMsg = ticksUntilMsg;
     }
 }

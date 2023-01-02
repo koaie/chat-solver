@@ -3,28 +3,34 @@ package net.chat;
 import java.util.regex.*;
 
 public class Solver {
+    private long lag = 100;
     public Answer solve(String input) {
-        long lag = 100;
         int maths = this.arithmetic(input);
         if (maths != 65535) {
-            return new Answer(Integer.toString(maths), this.delay(2000, 2500, lag));
+            return new Answer(Integer.toString(maths), this.delay(2000, 2400));
         }
         String quick = this.quick(input);
         if (quick != null) {
-            return new Answer(quick, this.delay(2200, 3000, lag));
+            return new Answer(quick, this.delay(2200, 3000));
         }
         String reversed = this.unreverse(input);
         if (reversed != null) {
-            return new Answer(reversed, this.delay(2300, 3000, lag));
+            return new Answer(reversed, this.delay(2000, 2500));
         }
         return null;
     }
 
-    public long delay(int min, int max, long lag) {
+    public long setLag(long lag) {
+        Chat.log.info("Lag set as {}", lag);
+        this.lag = lag;
+        return this.lag;
+    }
+
+    public long delay(int min, int max) {
         long delay = (int) (Math.random() * (max + 1 - min) + min);
 
-        Chat.log.info("Delay:{} Lag:{}", delay, lag);
-        delay = delay - lag;
+        Chat.log.info("Delay:{} Lag:{}", delay, this.lag);
+        delay = delay - this.lag;
         delay = delay / 50; // Milisceonds to ticks
         if (delay > 0) {
             return delay;
