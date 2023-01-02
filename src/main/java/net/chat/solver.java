@@ -3,44 +3,36 @@ package net.chat;
 import java.util.regex.*;
 
 public class Solver {
-    String input;
-
-    public Solver(String input) {
-        this.input = input;
-    }
-
-    public String testAll() {
-        long lag = 0; // Accounts for server compute
-        int maths = this.arithmetic(1200, 1800, lag);
+    public Answer solve(String input) {
+        int maths = this.arithmetic(input);
         if (maths != 65535) {
-            return Integer.toString(maths);
+            return new Answer(Integer.toString(maths), this.delay(1200, 1800, 0));
         }
-        String quick = this.quick(2000, 3000, lag);
+        String quick = this.quick(input);
         if (quick != null) {
-            return quick;
+            return new Answer(quick, this.delay(2000, 3000, 0));
         }
         return null;
     }
 
-    public void delay(int min, int max, long lag) {
-        long curTime = System.currentTimeMillis();
+    public long delay(int min, int max, long lag) {
         long delay = (int) (Math.random() * (max + 1 - min) + min);
-        Chat.log.info("Delay:{} Lag:{} Current time:{}", delay, lag, curTime);
 
-        while (System.currentTimeMillis() < curTime + delay - lag) {
-            ;
+        Chat.log.info("Delay:{} Lag:{}", delay, lag);
+        delay = delay - lag;
+        delay = delay / 50; // Milisceonds to ticks
+        if (delay > 0) {
+            return delay;
         }
-        Chat.log.info("Executed at {}", System.currentTimeMillis());
+        return 0;
     }
 
-    public int arithmetic(int min, int max, long lag) {
+    public int arithmetic(String input) {
         Pattern p = Pattern.compile("The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!");
-        Matcher m = p.matcher(this.input);
+        Matcher m = p.matcher(input);
         if (!m.find()) {
             return 65535;
         }
-
-        this.delay(min, max, lag);
         int x = Integer.parseInt(m.group(1));
         int y = Integer.parseInt(m.group(3));
         String op = m.group(2);
@@ -56,13 +48,12 @@ public class Solver {
         return x - y;
     }
 
-    public String quick(int min, int max, long lag) {
+    public String quick(String input) {
         Pattern p = Pattern.compile("The first to type '([\\d\\w]+)' wins!");
-        Matcher m = p.matcher(this.input);
+        Matcher m = p.matcher(input);
         if (!m.find()) {
             return null;
         }
-        this.delay(min, max, lag);
         return m.group(1);
     }
 }

@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "chatMixin"
+    "chatMixin",
+    "clientTimer"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,8 +1,9 @@
 package net.chat.mixin;
 
-import net.chat.Solver;
+
 import net.chat.Chat;
 import net.minecraft.text.Text;
+import net.chat.Answer;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,14 +17,14 @@ import org.jetbrains.annotations.Nullable;
 public class chatMixin {
 	@Inject(method = "logChatMessage", at = @At("TAIL"))
 	private void onMessageAdd(Text message, @Nullable MessageIndicator indicator, CallbackInfo ci) {
-		Solver solver = new Solver(message.getString());
-		String solved = solver.testAll();
+		Answer solved = Chat.solver.solve(message.getString());
 	
 		if (solved == null)
 		{
 			return;
 		}
 
-		Chat.msg.send(solved);
+		Chat.msg.setText(solved.text);
+		Chat.msg.setTimer(solved.ticks);
 	}
 }
