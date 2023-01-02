@@ -6,11 +6,11 @@
   "name": "chat solver",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "Koa"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/koaie/chat-solver",
+    "sources": "https://github.com/koaie/chat-solver"
   },
 
   "license": "CC0-1.0",
