@@ -7,7 +7,7 @@
   ],
   "client": [
     "chatMixin",
-    "clientTimer"
+    "msgTimer"
   ],
   "injectors": {
     "defaultRequire": 1

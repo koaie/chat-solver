@@ -11,20 +11,20 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public class clientTimer implements TimerAccess {
+public class msgTimer implements TimerAccess {
 
     @Unique
-    private long ticksUntilEvent;
+    private long ticksUntilMsg;
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void onTick(CallbackInfo ci) { // Fix parameters as needed
-        if (--this.ticksUntilEvent == 0L) {
+        if (--this.ticksUntilMsg == 0L) {
             Chat.msg.send();
         }
     }
 
     @Override
     public void setTimer(long ticksUntilEvent) {
-        this.ticksUntilEvent = ticksUntilEvent;
+        this.ticksUntilMsg = ticksUntilEvent;
     }
 }
