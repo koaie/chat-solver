@@ -15,7 +15,7 @@ public class Solver {
         }
         String reversed = this.unreverse(input);
         if (reversed != null) {
-            return new Answer(reversed, this.delay(2800, 3500, lag));
+            return new Answer(reversed, this.delay(2300, 3000, lag));
         }
         return null;
     }
