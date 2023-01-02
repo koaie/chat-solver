@@ -29,7 +29,7 @@ public class Solver {
     }
 
     public int arithmetic(String input) {
-        Pattern p = Pattern.compile("The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!");
+        Pattern p = Pattern.compile("^The first to solve '(\\d{1,4})\\s([-+x/])\\s(\\d{1,4})' wins!$");
         Matcher m = p.matcher(input);
         if (!m.find()) {
             return 65535;
@@ -50,7 +50,7 @@ public class Solver {
     }
 
     public String quick(String input) {
-        Pattern p = Pattern.compile("The first to type '([\\d\\w]+)' wins!");
+        Pattern p = Pattern.compile("^The first to type '([\\d\\w]+)' wins!$");
         Matcher m = p.matcher(input);
         if (!m.find()) {
             return null;
