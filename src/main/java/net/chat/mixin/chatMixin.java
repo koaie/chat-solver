@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 public class chatMixin {
 	@Inject(method = "logChatMessage", at = @At("TAIL"))
 	private void onMessageAdd(Text message, @Nullable MessageIndicator indicator, CallbackInfo ci) {
-		Chat.log.info("\"{}\"", message.getString());
 		Answer solved = Chat.solver.solve(message.getString());
 	
 		if (solved == null)
