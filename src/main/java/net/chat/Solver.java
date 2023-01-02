@@ -7,7 +7,7 @@ public class Solver {
         long lag = 100;
         int maths = this.arithmetic(input);
         if (maths != 65535) {
-            return new Answer(Integer.toString(maths), this.delay(1400, 1800, lag));
+            return new Answer(Integer.toString(maths), this.delay(2000, 2500, lag));
         }
         String quick = this.quick(input);
         if (quick != null) {
