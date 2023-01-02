@@ -4,13 +4,14 @@ import java.util.regex.*;
 
 public class Solver {
     public Answer solve(String input) {
+        long lag = 100;
         int maths = this.arithmetic(input);
         if (maths != 65535) {
-            return new Answer(Integer.toString(maths), this.delay(1200, 1800, 0));
+            return new Answer(Integer.toString(maths), this.delay(1400, 1800, lag));
         }
         String quick = this.quick(input);
         if (quick != null) {
-            return new Answer(quick, this.delay(2000, 3000, 0));
+            return new Answer(quick, this.delay(2200, 3000, lag));
         }
         return null;
     }
