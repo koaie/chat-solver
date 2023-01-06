@@ -11,11 +11,11 @@ public class Solver {
         }
         String quick = this.quick(input);
         if (quick != null) {
-            return new Answer(quick, this.delay(2200, 3000));
+            return new Answer(quick, this.delay(3400, 4200));
         }
         String reversed = this.unreverse(input);
         if (reversed != null) {
-            return new Answer(reversed, this.delay(2000, 2500));
+            return new Answer(reversed, this.delay(2500, 3200));
         }
         return null;
     }
