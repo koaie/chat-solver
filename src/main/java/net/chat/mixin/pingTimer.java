@@ -19,7 +19,6 @@ public class pingTimer implements PingTimerAccess {
     @Inject(method = "tick", at = @At("TAIL"))
     private void onTick(CallbackInfo ci) { // Fix parameters as needed
         if (--this.ticksUntilPing == 0L) {
-            Chat.server = Chat.client.getCurrentServerEntry();
             if (Chat.server == null) {
                 return;
             }
