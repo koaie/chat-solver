@@ -27,7 +27,8 @@ public class Chat implements ClientModInitializer {
             if (!handler.getConnection().isLocal()) {
 				Chat.server = Chat.client.getCurrentServerEntry();
 				log.info("logged in to {} with ping {}", Chat.server.address, Chat.server.ping);
-				((PingTimerAccess) Chat.client).setPingTimer(100L);
+				Chat.solver.setLag(Chat.server.ping);
+				// ((PingTimerAccess) Chat.client).setPingTimer(100L);
             }
         });
 	}
